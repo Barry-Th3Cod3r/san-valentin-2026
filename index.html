@@ -54,9 +54,17 @@
             gap: 10px;
             align-items: center;
         }
+
+        /* Ocultamos el reproductor de video */
+        #musica { display: none; }
     </style>
 </head>
 <body>
+
+    <div id="musica">
+        <iframe id="reproductor" width="0" height="0" src="https://www.youtube.com/embed/zOwi3aXemN4?enablejsapi=1" frameborder="0" allow="autoplay"></iframe>
+    </div>
+
     <div class="container" id="mainContainer">
         <img src="https://media.giphy.com/media/9Vx2SwRlEDKFDCS0GC/giphy.gif" alt="Gatitos durmiendo" class="gif">
         <h1>❤️¿Bri, quieres ser mi San Valentín? ❤️</h1>
@@ -76,6 +84,10 @@
         }
 
         function celebrar() {
+            // Activa la música al hacer clic
+            const iframe = document.getElementById('reproductor');
+            iframe.src += "&autoplay=1";
+
             document.getElementById('mainContainer').innerHTML = `
                 <div class="final-gifs">
                     <img src="https://media.giphy.com/media/HlAGKnh7LP0sUSkfIS/giphy.gif" class="gif">
@@ -85,8 +97,9 @@
                 <h1>💗¡SABÍA QUE DIRÍAS QUE SÍ!💗</h1>
                 <p>Eres lo más importante de mi vida. ¡Te amo muchísimo mi princesita!</p>
                 <p><strong>PD: ¡Carmen, mi negra!</strong></p>
+                <p style="font-size: 0.8rem; color: #888; margin-top: 15px;">🎵 Escuchando: Turning Page</p>
             `;
-            // Quitamos el "overflow hidden" para que pueda hacer scroll y ver todos los gifs si su móvil es pequeño
+            // Permitimos el scroll para ver todo el contenido nuevo
             document.body.style.overflow = "auto";
         }
     </script>
