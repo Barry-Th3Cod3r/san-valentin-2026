@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❤️¿Quieres ser mi San Valentín?❤️</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            background-color: #ffebee; 
+            overflow-x: hidden;
+        }
+        .container { 
+            text-align: center; 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            max-width: 90%;
+            margin: 20px;
+        }
+        h1 { color: #d32f2f; font-size: 1.5rem; }
+        .gif { width: 100%; max-width: 230px; border-radius: 10px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; }
+        .buttons { 
+            margin-top: 20px; 
+            position: relative; 
+            height: 60px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+        }
+        button { 
+            padding: 10px 25px; 
+            font-size: 1.2rem; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        #btnSi { background-color: #4caf50; color: white; margin-right: 10px; z-index: 10; }
+        #btnNo { background-color: #f44336; color: white; position: absolute; }
+        
+        /* Contenedor especial para los GIFs finales */
+        .final-gifs {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <img src="https://media.giphy.com/media/9Vx2SwRlEDKFDCS0GC/giphy.gif" alt="Gatitos durmiendo" class="gif">
+        <h1>❤️¿Bri, quieres ser mi San Valentín? ❤️</h1>
+        <div class="buttons">
+            <button id="btnSi" onclick="celebrar()">¡SÍ!</button>
+            <button id="btnNo" onmouseover="moverBoton()" onclick="moverBoton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function moverBoton() {
+            const btnNo = document.getElementById('btnNo');
+            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+            btnNo.style.left = x + 'px';
+            btnNo.style.top = y + 'px';
+        }
+
+        function celebrar() {
+            document.getElementById('mainContainer').innerHTML = `
+                <div class="final-gifs">
+                    <img src="https://media.giphy.com/media/HlAGKnh7LP0sUSkfIS/giphy.gif" class="gif">
+                    <img src="https://i.pinimg.com/originals/c3/82/32/c38232679589d6d81432f80879685387.gif" class="gif">
+                    <img src="https://media.tenor.com/bw1bQ_e_XmUAAAAC/ramon-happy-feet.gif" class="gif">
+                </div>
+                <h1>💗¡SABÍA QUE DIRÍAS QUE SÍ!💗</h1>
+                <p>Eres lo más importante de mi vida. ¡Te amo muchísimo mi princesita!</p>
+                <p><strong>PD: ¡Carmen, mi negra!</strong></p>
+            `;
+            // Quitamos el "overflow hidden" para que pueda hacer scroll y ver todos los gifs si su móvil es pequeño
+            document.body.style.overflow = "auto";
+        }
+    </script>
+</body>
+</html>
