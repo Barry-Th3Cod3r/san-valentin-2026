@@ -1,107 +1,332 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>❤️¿Quieres ser mi San Valentín?❤️</title>
+    <title>❤️ ¿Quieres ser mi San Valentín? ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap"
+        rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Arial', sans-serif; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            min-height: 100vh; 
-            margin: 0; 
-            background-color: #ffebee; 
-            overflow-x: hidden;
+        * {
+            box-sizing: border-box;
         }
-        .container { 
-            text-align: center; 
-            background: white; 
-            padding: 2rem; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
-            max-width: 90%;
-            margin: 20px;
-        }
-        h1 { color: #d32f2f; font-size: 1.5rem; }
-        .gif { width: 100%; max-width: 230px; border-radius: 10px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; }
-        .buttons { 
-            margin-top: 20px; 
-            position: relative; 
-            height: 60px; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-        }
-        button { 
-            padding: 10px 25px; 
-            font-size: 1.2rem; 
-            border: none; 
-            border-radius: 10px; 
-            cursor: pointer; 
-            transition: 0.3s;
-            font-weight: bold;
-        }
-        #btnSi { background-color: #4caf50; color: white; margin-right: 10px; z-index: 10; }
-        #btnNo { background-color: #f44336; color: white; position: absolute; }
-        
-        /* Contenedor especial para los GIFs finales */
-        .final-gifs {
+
+        body {
+            font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
-            gap: 10px;
             align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
+            overflow-x: hidden;
+            padding: 20px;
         }
 
-        /* Ocultamos el reproductor de video */
-        #musica { display: none; }
+        /* Corazones flotantes de fondo */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatUp 6s ease-in infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.6;
+            }
+
+            90% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 420px;
+            position: relative;
+            z-index: 10;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: #e91e63;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .gif {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            min-height: 60px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #btnSi {
+            background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
+        }
+
+        #btnSi:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+        }
+
+        #btnNo {
+            background: linear-gradient(135deg, #f44336 0%, #ff5722 100%);
+            position: fixed;
+            transition: none !important;
+            z-index: 1000;
+        }
+
+        .final-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .final-content p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .final-content h3 {
+            color: #e91e63;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .spotify-container {
+            margin-top: 15px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .music-note {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* Confeti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            z-index: 1000;
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
+
 <body>
 
-    <div id="musica">
-        <iframe id="reproductor" width="0" height="0" src="https://www.youtube.com/embed/zOwi3aXemN4?enablejsapi=1" frameborder="0" allow="autoplay"></iframe>
-    </div>
+    <!-- Corazones flotantes de fondo -->
+    <div class="hearts-bg" id="heartsBg"></div>
 
     <div class="container" id="mainContainer">
-        <img src="https://media.giphy.com/media/9Vx2SwRlEDKFDCS0GC/giphy.gif" alt="Gatitos durmiendo" class="gif">
-        <h1>❤️¿Bri, quieres ser mi San Valentín? ❤️</h1>
+        <!-- GIFs de la primera ventana -->
+        <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXU0enZodmZpaG5uY3U4OXVlcmt6ZmdndDhtYTRpMmFxbjVzdG5meCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/pWFC7Xcn1Soxvpzx5g/giphy.gif"
+            alt="Cute Love" class="gif">
+
+        <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3ExejdyMnl0MGRtdmNvazE0Mzc2eGxkZ2dseW5pa2h4aDVubnA3YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9Vx2SwRlEDKFDCS0GC/giphy.gif"
+            alt="Love" class="gif">
+
+        <h1>❤️ ¿Bri, quieres ser mi San Valentín? ❤️</h1>
+
         <div class="buttons">
-            <button id="btnSi" onclick="celebrar()">¡SÍ!</button>
-            <button id="btnNo" onmouseover="moverBoton()" onclick="moverBoton()">No</button>
+            <button id="btnSi" onclick="celebrar()">¡SÍ! 💕</button>
         </div>
     </div>
 
+    <!-- Botón NO fuera del contenedor para que pueda moverse libremente -->
+    <button id="btnNo" onmouseover="moverBoton()" onmousedown="moverBoton()" ontouchstart="moverBoton()">No 😢</button>
+
     <script>
+        // Crear corazones flotantes de fondo
+        function crearCorazones() {
+            const container = document.getElementById('heartsBg');
+            const hearts = ['❤️', '💕', '💗', '💖', '💘'];
+
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.fontSize = (15 + Math.random() * 20) + 'px';
+                container.appendChild(heart);
+            }
+        }
+        crearCorazones();
+
+        // Posicionar el botón NO inicialmente
+        const btnNo = document.getElementById('btnNo');
+        const btnSi = document.getElementById('btnSi');
+
+        // Posición inicial del botón NO (al lado del Sí)
+        function posicionInicial() {
+            const siRect = btnSi.getBoundingClientRect();
+            btnNo.style.left = (siRect.right + 20) + 'px';
+            btnNo.style.top = siRect.top + 'px';
+        }
+
+        window.addEventListener('load', posicionInicial);
+        window.addEventListener('resize', posicionInicial);
+
+        // Función para mover el botón NO
         function moverBoton() {
             const btnNo = document.getElementById('btnNo');
-            const x = Math.random() * (window.innerWidth - btnNo.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btnNo.offsetHeight);
-            btnNo.style.left = x + 'px';
-            btnNo.style.top = y + 'px';
+            const btnWidth = btnNo.offsetWidth;
+            const btnHeight = btnNo.offsetHeight;
+
+            // Calcular nueva posición aleatoria dentro de la ventana
+            const maxX = window.innerWidth - btnWidth - 20;
+            const maxY = window.innerHeight - btnHeight - 20;
+
+            const newX = Math.max(20, Math.random() * maxX);
+            const newY = Math.max(20, Math.random() * maxY);
+
+            btnNo.style.left = newX + 'px';
+            btnNo.style.top = newY + 'px';
+        }
+
+        // Crear confeti
+        function crearConfeti() {
+            const colors = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#ff6b9d', '#c56cf0'];
+
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    confetti.style.width = (5 + Math.random() * 10) + 'px';
+                    confetti.style.height = confetti.style.width;
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
         }
 
         function celebrar() {
-            // Activa la música al hacer clic
-            const iframe = document.getElementById('reproductor');
-            iframe.src += "&autoplay=1";
+            // Ocultar el botón NO
+            document.getElementById('btnNo').style.display = 'none';
 
-            document.getElementById('mainContainer').innerHTML = `
-                <div class="final-gifs">
-                    <img src="https://media.giphy.com/media/HlAGKnh7LP0sUSkfIS/giphy.gif" class="gif">
-                    <img src="https://i.pinimg.com/originals/c3/82/32/c38232679589d6d81432f80879685387.gif" class="gif">
-                    <img src="https://media.tenor.com/bw1bQ_e_XmUAAAAC/ramon-happy-feet.gif" class="gif">
+            // Crear confeti
+            crearConfeti();
+
+            // Cambiar la interfaz
+            const mainContainer = document.getElementById('mainContainer');
+            mainContainer.innerHTML = `
+                <div class="final-content">
+                    <img src="https://media1.tenor.com/m/cpvT8gwXZQcAAAAd/tom-holland-zendaya.gif" class="gif" alt="Tom Holland y Zendaya">
+                    
+                    <img src="https://media1.tenor.com/m/hz7o5kQuQocAAAAC/i-love-you-happy-feet.gif" class="gif" alt="Happy Feet Love">
+                    
+                    <h1>💗 ¡SABÍA QUE DIRÍAS QUE SÍ! 💗</h1>
+                    
+                    <p>Eres lo más importante de mi vida. ¡Te amo muchísimo mi princesita! 👸💕</p>
+                    
+                    <h3>PD: ¡Carmen, mi negra! 🖤</h3>
+                    
+                    <div class="spotify-container">
+                        <iframe 
+                            style="border-radius:12px" 
+                            src="https://open.spotify.com/embed/track/2kfGoV9a5dbSKCNmUWH2ZF?utm_source=generator&theme=0" 
+                            width="100%" 
+                            height="152" 
+                            frameBorder="0" 
+                            allowfullscreen="" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    
+                    <p class="music-note">🎵 Nuestra canción: Turning Page - Sleeping At Last</p>
                 </div>
-                <h1>💗¡SABÍA QUE DIRÍAS QUE SÍ!💗</h1>
-                <p>Eres lo más importante de mi vida. ¡Te amo muchísimo mi princesita!</p>
-                <p><strong>PD: ¡Carmen, mi negra!</strong></p>
-                <p style="font-size: 0.8rem; color: #888; margin-top: 15px;">🎵 Escuchando: Turning Page</p>
             `;
-            // Permitimos el scroll para ver todo el contenido nuevo
+
+            // Permitir scroll
             document.body.style.overflow = "auto";
         }
     </script>
 </body>
+
 </html>
